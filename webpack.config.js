@@ -54,18 +54,6 @@ module.exports = {
 				use: cssConfig
 			},
 			{
-				test: /\.hbs$/,
-				loader: 'handlebars-loader',
-				query: {
-					helperDirs: [
-						path.join(__dirname, 'src', 'hbs_helpers')
-					],
-					partialDirs: [
-						path.join(__dirname, 'src', 'views')
-					]
-				}
-			},
-			{
 				test: /\.(jpe?g|png|gif|svg)$/i,
 				use: [
 					'file-loader?name=[name].[ext]&outputPath=assets/images/&publicPath=/',
@@ -89,7 +77,7 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: './src/index.hbs',
+			template: './src/index.html',
 			hash: true,
 			minify: {
 				collapseWhitespace: false
@@ -151,7 +139,7 @@ module.exports = {
         // Prints more readable module names in the browser
 		new webpack.NamedModulesPlugin(),
 		new PurifyCSSPlugin({
-			paths: glob.sync(path.join(__dirname, 'src/*.hbs'))
+			paths: glob.sync(path.join(__dirname, 'src/*.html'))
 		})
 
         // Preload/prefetch resources

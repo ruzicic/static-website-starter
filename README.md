@@ -1,6 +1,6 @@
 # Static website builder
 
-Simple starter for a Bootstrap & Handlebars based websites
+Simple starter for a Bootstrap based websites
 
 ## Installation
 Clone project
@@ -20,7 +20,6 @@ yarn install
 ## Build for production
 
 ```yarn build``` will create /dist folder with optimized bundles, including:
-- Prerendered Handlebars templates
 - Removed unused CSS - [purifycss-webpack](https://github.com/webpack-contrib/purifycss-webpack)
 - Minified JS
 - Optimized image files
