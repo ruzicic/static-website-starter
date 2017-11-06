@@ -1,0 +1,36 @@
+.button {
+    white-space: nowrap;
+    text-transform: uppercase;  
+    text-decoration: none;
+    transition: all 150ms ease;
+    will-change: transform;
+    
+    &:hover {
+      text-decoration: none;
+      // transform: translateY(-1px);
+    }
+  }
+  
+  .button-orange {
+    @extend .button;
+    @extend .text-white;
+    background-color: $orange;  
+    padding: 20px 40px;
+    box-shadow: $button-shadow;
+    
+    &:hover {
+      box-shadow: $button-shadow-hover;
+    }
+  }
+  
+  .button-white {
+    @extend .button;
+    @extend .text-green;
+    background-color: $white;  
+    padding: 20px 40px;
+    border: 1px solid $primary-green;
+    
+    &:hover {
+      box-shadow: $button-shadow-hover;
+    }
+  }

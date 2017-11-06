@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
-const css = require('./style.scss'); // Required
+import * as Styles from './styles/scss/main.scss';
 
 console.log('app.js loaded');
