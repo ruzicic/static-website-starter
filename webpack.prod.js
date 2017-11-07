@@ -61,7 +61,8 @@ module.exports = merge(baseConfig, {
 
 		// Extract imported CSS into own file
 		new ExtractTextPlugin({
-			filename: '[name].[chunkhash:8].css'
+			filename: '[name].[chunkhash:8].css',
+			allChunks: true
 		}),
 
 		// Minify JS
