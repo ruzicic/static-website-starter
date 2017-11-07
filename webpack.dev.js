@@ -11,7 +11,6 @@ const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
 module.exports = merge(baseConfig, {
 	devtool: 'eval-source-map',
 	output: {
-		// path: path.join(__dirname, 'dist'),
 		filename: '[name].bundle.[hash].js'
 	},
 	devServer: {
