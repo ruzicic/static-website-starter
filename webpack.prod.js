@@ -3,10 +3,12 @@ const baseConfig = require('./webpack.common');
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // the path(s) that should be cleaned
 let pathsToClean = [
@@ -22,12 +24,11 @@ let cleanOptions = {
 };
 
 const reStyle = /\.(css|scss|sass)$/;
-const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
 
 module.exports = merge(baseConfig, {
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: '[name].bundle.[chunkhash:8].js',
+		filename: '[name].bundle.[chunkhash:8].js'
 	},
 
 	module: {
@@ -58,6 +59,21 @@ module.exports = merge(baseConfig, {
 
 	plugins: [
 		new CleanWebpackPlugin(pathsToClean, cleanOptions),
+
+		new CopyWebpackPlugin([
+			{
+				from: './src/assets',
+				to: './assets'
+			}
+		]),
+
+		new HtmlWebpackPlugin({
+			template: './src/index.html',
+			hash: true,
+			minify: {
+				collapseWhitespace: true
+			}
+		}),
 
 		// Extract imported CSS into own file
 		new ExtractTextPlugin({

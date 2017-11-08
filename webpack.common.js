@@ -4,8 +4,11 @@ const path = require('path');
 const webpack = require('webpack');
 
 const isProduction = process.env.NODE_ENV === 'production';
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 const bootstrapConfig = isProduction ? bootstrapEntryPoints.prod : bootstrapEntryPoints.dev;
+
+const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
 
 module.exports = {
 	entry: {
@@ -20,6 +23,34 @@ module.exports = {
 				use: {
 					loader: 'babel-loader'
 				}
+			},
+
+			{
+				test: reImage,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name(file) {
+								// if (isDevelopment) {
+								// 	return '[path][name].[ext]?[hash]'
+								// }
+
+								return '[path][name].[ext]?[hash]'
+							},
+							useRelativePath: isProduction,
+							outputPath: isProduction ? '/assets' : '/',
+							publicPath: '/'
+						}
+					},
+					{
+						loader: 'image-webpack-loader',
+						options: {
+							// Speed up initial and subsequent compilations while developing 
+							bypassOnDebug: true
+						}
+					}
+				]
 			},
 
 			// Bootstrap 4

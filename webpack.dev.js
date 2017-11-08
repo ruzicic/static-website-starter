@@ -6,7 +6,6 @@ const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const reStyle = /\.(css|scss|sass)$/;
-const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
 
 module.exports = merge(baseConfig, {
 	devtool: 'eval-source-map',
@@ -43,12 +42,12 @@ module.exports = merge(baseConfig, {
 					path.resolve(__dirname, '../')
 				],
 				use: [
-					// creates style nodes from JS strings
+					// Creates style nodes from JS strings
 					{
 						loader: 'style-loader'
 					},
 
-					// translates CSS into CommonJS
+					// Translates CSS into CommonJS
 					{
 						loader: 'css-loader',
 						options: {
@@ -67,10 +66,19 @@ module.exports = merge(baseConfig, {
 						}
 					},
 
-					// compiles Sass to CSS
+					// Compiles Sass to CSS
 					{
-						loader: 'sass-loader'
-					}
+						loader: 'sass-loader',
+						options: {
+							// sourceMap: true
+						}
+					},
+
+					// Resolve images in SCSS
+					// https://github.com/webpack-contrib/sass-loader#problems-with-url
+					// {
+					// 	loader: 'resolve-url-loader'
+					// }
 				]
 			}
 		]
